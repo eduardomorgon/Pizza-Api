@@ -44,6 +44,7 @@ public class BordaController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public Iterable<Borda> all() {
+        
         return service.all();
     }
     
@@ -51,37 +52,31 @@ public class BordaController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public Borda find(@PathVariable Integer id) {
-        return service.find(id);
+        
+        return service.findById(id);
     }
     
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void save(@Valid @RequestBody Borda borda, HttpServletRequest request, HttpServletResponse response) {
+        
         Borda bordaCreated = service.save(borda);
         response.setHeader("Location", request.getRequestURL().append(bordaCreated.getId()).toString());
     }
     
     @PutMapping(value = "{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void edit(@PathVariable("id") Integer id,
+    @ResponseStatus(HttpStatus.OK)
+    public Borda edit(@PathVariable("id") Integer id,
                      @Valid @RequestBody Borda borda) {
         
-        Optional<Borda> optionalBorda = Optional.ofNullable(service.find(id));
-        optionalBorda 
-                .filter(b -> b.getId().equals(borda.getId()))
-                .orElseThrow(() -> new ResourceNotFoundException("Borda não pode ser alterada, favor verificar se ela existe ou id passado como parametro é diferente do id do json"));
-        service.save(borda); 
+        return service.save(borda); 
     }
     
     @DeleteMapping(value = "{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remove(@PathVariable("id") Integer id) {
         
-        Optional<Borda> optionalBorda = Optional.ofNullable(service.find(id));
-        Borda borda = optionalBorda 
-                .map(b -> b)
-                .orElseThrow(() -> new ResourceNotFoundException("Não existe Borda com o id: "+id));
-        service.delete(borda);
+        service.delete(id);
     }
     
 }

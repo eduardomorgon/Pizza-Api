@@ -16,3 +16,13 @@ alter table precos_pizza add constraint FKhq2s96cqcjtdo3gsfis7rx41i foreign key 
 insert into borda(nome, descricao)values('Alho', 'Deliciosa borda de alho.');
 insert into borda(nome, descricao)values('Catupiry', 'Deliciosa borda de catupiry.');
 insert into borda(nome, descricao)values('Cream Cheese', 'Deliciosa borda de cream cheese.');
+
+insert into pizza(nome, descricao)values('Mussarela', 'Pizza de mussarela, com rodelas de tomates');
+insert into precos_pizza (pizza_id, tipo_de_pizza, preco) values (1, 'BROTO', 18);
+insert into precos_pizza (pizza_id, tipo_de_pizza, preco) values (1, 'MEDIA', 24);
+insert into precos_pizza (pizza_id, tipo_de_pizza, preco) values (1, 'GRANDE', 30);
+
+insert into pizza(nome, descricao)values('Calabreza', 'Pizza de calabreza, com cebola');
+insert into precos_pizza (pizza_id, tipo_de_pizza, preco) values (2, 'BROTO', 17.50);
+insert into precos_pizza (pizza_id, tipo_de_pizza, preco) values (2, 'MEDIA', 24.90);
+insert into precos_pizza (pizza_id, tipo_de_pizza, preco) values (2, 'GRANDE', 29.90);

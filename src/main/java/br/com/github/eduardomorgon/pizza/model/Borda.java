@@ -28,7 +28,7 @@ public class Borda implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NotEmpty(message = "Nome é obrigatorio")
-    @Size(min = 3, max = 25, message = "Tamanho do campo nome.")
+    @Size(min = 3, max = 25, message = "Nome precisa ter no minimo 3 caracteres.")
     private String nome;
     @NotEmpty(message = "Descrição é obrigatorio")
     private String descricao;

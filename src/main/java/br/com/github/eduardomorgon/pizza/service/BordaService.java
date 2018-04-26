@@ -20,20 +20,24 @@ public class BordaService {
         this.repository = repository;
     }
 
-    public void delete(Borda tipoDeBorda) {
-        repository.delete(tipoDeBorda);
+    public void delete(Integer id) {
+        
+        Borda borda = findById(id);
+        repository.delete(borda);
     }
 
-    public Borda find(Integer id) {
+    public Borda findById(Integer id) {
+        
         return repository.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
 
     public Borda save(Borda tipoDeBorda) {
-        repository.save(tipoDeBorda);
-        return tipoDeBorda;
+        
+        return repository.save(tipoDeBorda);
     }
 
     public Iterable<Borda> all() {
+        
         return repository.findAll();
     }
 
