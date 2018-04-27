@@ -5,13 +5,17 @@
  */
 package br.com.github.eduardomorgon.pizza.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  *
  * @author eduardo
  */
 public enum TipoDePizza {
     
-    BROTO, MEDIA, GRANDE;
+    @JsonProperty("broto")BROTO, 
+    @JsonProperty("media")MEDIA, 
+    @JsonProperty("grande")GRANDE;
     
     
 }
