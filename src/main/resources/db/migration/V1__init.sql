@@ -26,3 +26,7 @@ insert into pizza(nome, descricao)values('Calabreza', 'Pizza de calabreza, com c
 insert into precos_pizza (pizza_id, tipo_de_pizza, preco) values (2, 'BROTO', 17.50);
 insert into precos_pizza (pizza_id, tipo_de_pizza, preco) values (2, 'MEDIA', 24.90);
 insert into precos_pizza (pizza_id, tipo_de_pizza, preco) values (2, 'GRANDE', 29.90);
+
+insert into endereco(rua, numero, bairro, referencia)values('Rua do teste', 123, 'Jd. do Paraiso', 'Proximo posto de gasolina');
+
+insert into cliente(telefone, nome, endereco_id)values('11-98765-1122', 'Fulano de Tal', 1);

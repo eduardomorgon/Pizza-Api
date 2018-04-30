@@ -11,16 +11,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
  * @author eduardo
  */
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class Cliente implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -29,34 +40,4 @@ public class Cliente implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
 
-    public Cliente() {
-    }
-
-    public Cliente(String telefone, String nome, Endereco endereco) {
-        this.telefone = telefone;
-        this.nome = nome;
-        this.endereco = endereco;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    @Override
-    public String toString() {
-        return "Cliente{" + "id=" + id + ", telefone=" + telefone + ", nome=" + nome + ", enderecos=" + endereco + '}';
-    }
-    
 }
