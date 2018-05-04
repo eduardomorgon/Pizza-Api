@@ -11,72 +11,50 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
  * @author eduardo
  */
 @Entity
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString
 public class Pedido implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @OneToOne(cascade = CascadeType.ALL)
+    private Integer id;
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "ID_CLIENTE")
+    @Setter
     private Cliente cliente;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_ENDERECO")
-    private Endereco endereco;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ITEM_ID")
-    private List<Item> itens;
-
-    public Pedido() {
-        this.itens = new ArrayList<>();
-    }
-
-    public Pedido(Cliente cliente, Endereco endereco, List<Item> itens) {
-        this.cliente = cliente;
-        this.endereco = endereco;
-        this.itens = itens;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public List<Item> getItens() {
-        return itens;
-    }
+    @JoinColumn(name = "PEDIDO_ID")
+    private List<Item> itens = new ArrayList<>();
     
-    public  BigDecimal getValorTotal() {
-        return itens.stream().map(i -> i.getValorItem()).reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
+    public BigDecimal getValorTotal() {
+        
+        return itens.stream().map(item -> item.getValorItem()).reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
     }
     
     public int getQuantidadeDePizza() {
-        return this.itens.stream().mapToInt(i -> i.getQuantidade()).sum();
+        
+        return this.itens.stream().mapToInt(item -> item.getQuantidade()).sum();
     }
-
-    @Override
-    public String toString() {
-        return "Pedido{" + "id=" + id + ", cliente=" + cliente.getNome() + ", endereco=" + endereco + ", itens=" + itens + ", total="+this.getValorTotal()+"}";
-    }
-
          
 }
